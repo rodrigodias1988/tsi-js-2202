@@ -13,10 +13,13 @@ e = document.body;
 //e = document.scripts[2];
 //e = document.scripts[2].getAttribute('src');
 
+//Com querySelector()
 //e = document.body.firstElementChild.firstElementChild;
 //e = document.querySelector('span');
 //e = document.querySelector('div .row');
-e = document.querySelector('input#task');
+//e = document.querySelector('input#task');
+//e = document.querySelector('li:last-child').innerText;
+e = document.querySelector('li:nth-child(3)').innerText;
 
 
 
