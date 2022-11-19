@@ -1,22 +1,29 @@
-document.
-    querySelector('button'). 
-        addEventListener('click', recuperaConteudoAjax);
+document.querySelector('button').addEventListener('click',recuperaDados);
+function recuperaDados(evento){
+    evento.preventDefault();
 
-function recuperaConteudoAjax(){
+    //Fazemos a chamada                              //então (depois)
+    fetch('http://127.0.0.1:5500/ajax/conteudo.txt').then (function(ret){
 
-    const XHR = new XMLHttpRequest;
 
-    XHR.open('GET', 'http://127.0.0.1:5500/ajax/conteudo.txt', true);
+        //pegamos apenas o conteúdo do retorno
+        return ret.text();
+    
+    //então
+    }).then(function(cont){
 
-    XHR.onload = function(){
+        console.log(cont);
 
-        if(this.status==200){
+        let datos = JSON.parse(cont);
+        let saida= '';
+        datos.forEach(function(aluno) {
+        
+            saida  = aluno.idade >=18 ? `${aluno.nome} é maior de idade <br>` : `${aluno.nome} é menor de idade <br>`;
 
-            document.querySelector('#dadoRecuperado').innerHTML
-                = this.responseText;
-        }
-    }
+        });
 
-    XHR.send();
-
+        document.querySelector('#dadoRecuperado').innerHTML = saida;
+            //trabalhamos com o conteudo retornado
+            //console.log(cont)
+    });
 }
